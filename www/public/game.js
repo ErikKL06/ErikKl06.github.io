@@ -1,9 +1,12 @@
 // Laddar in bilder till spelet
 let body = new Image();
-body.src = "img/grön.png";
+body.src = "img/greenS.jpg";
 
 // Position
 let xPos = 260, yPos = 220;
+
+//Lagrar tangent-händelser
+let keysDown = {};
 
 /** Körs då sidan är laddad */
 function init(){
@@ -13,8 +16,7 @@ function init(){
     gameLoop();
   }
 
-//Lagrar tangent-händelser
-let keysDown = {};
+
 
 
 /** Sparar undan en tangentryckning för bearbetning  */
@@ -42,6 +44,22 @@ function gameLoop() {
        });
   }
 
+
+    /** Renderar canvasen */
+function render(){
+    let canvas = document.getElementById('gameCanvas');
+    let ctx = canvas.getContext( '2d' );
+   
+    // Ser till att radera med vit bakgrund som det sedan skall ritas på
+    ctx.save();
+    ctx.fillStyle = "white";
+    ctx.fillRect(0,0,canvas.width, canvas.height);
+   
+    ctx.drawImage(body, xPos, yPos);
+   
+    ctx.restore();
+  }
+
 /** Uppdaterar läget på fågeln */
 function update(){
     if ('ArrowLeft' in keysDown) { // Vänster     
@@ -56,22 +74,6 @@ function update(){
     if ('ArrowDown' in keysDown) { // Ner
        yPos += 5;
     }
-  }
-
-  
-  /** Renderar canvasen */
-function render(){
-    let canvas = document.getElementById('gameCanvas');
-    let ctx = canvas.getContext( '2d' );
-   
-    // Ser till att radera med vit bakgrund som det sedan skall ritas på
-    ctx.save();
-    ctx.fillStyle = "white";
-    ctx.fillRect(0,0,canvas.width, canvas.height);
-   
-    ctx.drawImage(body, xPos, yPos);
-   
-    ctx.restore();
   }
 
 
