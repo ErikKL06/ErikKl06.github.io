@@ -5,7 +5,7 @@ body.src = "img/greenS.jpg";
 
 
 // Position
-let xPos = 250, yPos = 220;
+let xPos = 0, yPos = 0;
 
 //Lagrar tangent-händelser
 let keysDown = {};
@@ -78,16 +78,16 @@ function render(){
 /** Uppdaterar läget på fågeln */
 function update(){
     if ('ArrowLeft' in keysDown) { // Vänster     
-       xPos -= 5;
+       xPos -= 50;
     }
     if ('ArrowRight' in keysDown) { // Höger
-       xPos += 5;
+       xPos += 50;
     }
     if ('ArrowUp' in keysDown) { // Upp
-       yPos -= 5;
+       yPos -= 50;
     }
     if ('ArrowDown' in keysDown) { // Ner
-       yPos += 5;
+       yPos += 50;
     }
   }
 
