@@ -1,6 +1,9 @@
 // Laddar in bilder till spelet
 let body = new Image();
 body.src = "img/greenS.jpg";
+body.onload = function() {
+    init();
+};
 
 
 
@@ -57,6 +60,8 @@ function render(){
     ctx.fillStyle = "white";
     ctx.fillRect(0,0,canvas.width, canvas.height);
 
+
+    //draw grid
     for(let i = 1; i < 10; i++){
       ctx.beginPath();
       ctx.moveTo(i*50, 0);
@@ -70,7 +75,10 @@ function render(){
       ctx.stroke();
     }
 
-    ctx.drawImage(body, xPos, yPos);
+    // Draw image with specified width and height
+    let imageWidth = 50; // Set desired width
+    let imageHeight = 50; // Set desired height
+    ctx.drawImage(body, xPos, yPos, imageWidth, imageHeight);
     
     ctx.restore();
 }
