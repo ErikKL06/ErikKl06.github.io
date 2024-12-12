@@ -2,8 +2,10 @@
 let body = new Image();
 body.src = "img/greenS.jpg";
 
+
+
 // Position
-let xPos = 260, yPos = 220;
+let xPos = 250, yPos = 220;
 
 //Lagrar tangent-händelser
 let keysDown = {};
@@ -54,11 +56,11 @@ function render(){
     ctx.save();
     ctx.fillStyle = "white";
     ctx.fillRect(0,0,canvas.width, canvas.height);
-   
+
     ctx.drawImage(body, xPos, yPos);
-   
+    
     ctx.restore();
-  }
+}
 
 /** Uppdaterar läget på fågeln */
 function update(){
@@ -75,15 +77,5 @@ function update(){
        yPos += 5;
     }
   }
-
-
-
-
-
-
-
-
-
-
 
   window.addEventListener("load",init);
