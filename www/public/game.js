@@ -57,6 +57,19 @@ function render(){
     ctx.fillStyle = "white";
     ctx.fillRect(0,0,canvas.width, canvas.height);
 
+    for(let i = 1; i < 10; i++){
+      ctx.beginPath();
+      ctx.moveTo(i*50, 0);
+      ctx.lineTo(i*50, 500);
+      ctx.stroke();
+    }
+    for(let i = 1; i < 10; i++){
+      ctx.beginPath();
+      ctx.moveTo(500,i*50);
+      ctx.lineTo( 0, i*50);
+      ctx.stroke();
+    }
+
     ctx.drawImage(body, xPos, yPos);
     
     ctx.restore();
