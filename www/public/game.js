@@ -6,6 +6,9 @@ body.onload = function() {
 };
 
 
+let velocityX = 50; // Hastighet för ormen x-led
+let velocityY = 50; // Hastighet för ormen y-led
+
 
 // Position
 let xPos = 0, yPos = 0;
@@ -86,16 +89,20 @@ function render(){
 /** Uppdaterar läget på fågeln */
 function update(){
     if ('ArrowLeft' in keysDown) { // Vänster     
-       xPos -= 50;
+       velocityX = -50;
+       velocityY = 0;
     }
     if ('ArrowRight' in keysDown) { // Höger
-       xPos += 50;
+      velocityX = 50;
+      velocityY = 0;
     }
     if ('ArrowUp' in keysDown) { // Upp
-       yPos -= 50;
+      velocityX = 0;
+      velocityY = 50;
     }
     if ('ArrowDown' in keysDown) { // Ner
-       yPos += 50;
+      velocityX = 0;
+      velocityY = -50;
     }
   }
 
