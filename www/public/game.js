@@ -1,13 +1,15 @@
 // Laddar in bilder till spelet
-let body = new Image();
-body.src = "img/greenS.jpg";
-body.onload = function() {
+let head = new Image();
+head.src = "img/greenS.jpg";
+head.onload = function() {
     init();
 };
 
 
 let velocityX = 50; // Hastighet för ormen x-led
 let velocityY = 50; // Hastighet för ormen y-led
+
+let snakeBody = [];
 
 
 // Position
@@ -22,6 +24,9 @@ function init(){
     document.addEventListener("keyup", keyUp, false);
    
     gameLoop();
+
+        // update();
+        setInterval(update, 1000/10); //100 milliseconds
   }
 
 
@@ -81,9 +86,21 @@ function render(){
     // Draw image with specified width and height
     let imageWidth = 50; // Set desired width
     let imageHeight = 50; // Set desired height
-    ctx.drawImage(body, xPos, yPos, imageWidth, imageHeight);
+    ctx.drawImage(head, xPos, yPos, imageWidth, imageHeight);
     
     ctx.restore();
+
+    if (snakeX == foodX && snakeY == foodY) {
+      snakeBody.push([foodX, foodY]);
+      placeFood();
+    }
+
+    for (let i = snakeBody.length-1; i > 0; i--) {
+        snakeBody[i] = snakeBody[i-1];
+    }
+    if (snakeBody.length) {
+        snakeBody[0] = [snakeX, snakeY];
+    }
 }
 
 /** Uppdaterar läget på fågeln */
