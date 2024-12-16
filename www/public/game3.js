@@ -30,7 +30,7 @@ snakeImage.src = 'img/greenS.jpg'; // Replace with the path to your snake image
 let foodImage = new Image();
 foodImage.src = 'img/greenS.jpg'; // Replace with the path to your food image
 
-let re = document.getElementById("restart");
+let re = document.getElementById("re");
 
 
 
@@ -167,4 +167,5 @@ function restart(){
     snakeBody = [];
     gameOver = false;
     placeFood();
+    alert("Game Restarted");
 }

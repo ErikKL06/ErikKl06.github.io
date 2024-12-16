@@ -1,3 +1,4 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -8,9 +9,20 @@
    <title>Document</title>
 </head>
 <body>
+   <?php    
+   	 if(isset($_SESSION['uid'])){
+   		 include 'private.php';
+   		 
+   	 }else{
+   		 include 'public.php';
+   	 }
+    ?>
    <h1>Spel</h1>
    <button type="button" id="re">Omstart</button>
    <canvas id="board" width="500rem" height="500rem" style="border: 1px solid black;">
    Din webbläsare stödjer inte HTML5 canvas tag.</canvas>
+   <section id="status">
+      <p id="userStatus">Utloggad</p>
+   </section>
 </body>
 </html>
