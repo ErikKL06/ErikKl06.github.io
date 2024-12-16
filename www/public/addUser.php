@@ -6,7 +6,7 @@ if(isset($_POST['email'],$_POST['userName'],$_POST['pwd'])){
     $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
     
     /* Bygger upp sql frågan */
-    $stmt= $db->prepare("INSERT INTO user(uid, username, email, password) VALUES(UUID(), :user, :fn, :pwd)");
+    $stmt= $db->prepare("INSERT INTO users(uid, username, email, password) VALUES(UUID(), :user, :fn, :pwd)");
     
     $stmt->bindValue(":user", $user);
     $stmt->bindValue(":fn", $email);
