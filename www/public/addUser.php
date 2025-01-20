@@ -5,11 +5,15 @@ if(isset($_POST['email'],$_POST['userName'],$_POST['pwd'])){
     $user = filter_input(INPUT_POST, 'userName', FILTER_SANITIZE_SPECIAL_CHARS);
     $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
 
-    if(checkAvailability($email, $user)) {
+    $availability = checkAvailability($email, $user);
+    if($availability['Eavailable'] == true && $availability['Uavailable'] == true) {
         $result = addUser($email, $user, $pwd);
     }
-    else{
-        echo "<p>användare finns redan</p>";
+    else if($availability['Eavailable'] == false){
+        echo "<p>Email finns redan</p>";
+    }
+    else if($availability['Uavailable'] == false){
+        echo "<p>Användaren finns redan</p>";
     }
     
 

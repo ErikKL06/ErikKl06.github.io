@@ -1,82 +1,87 @@
 <?php
+
 /**
-* Anluter till databasen och returnerar ett PDO-objekt
-* @return PDO  Objektet som returneras
-*/
-function connectToDb(){
+ * Anluter till databasen och returnerar ett PDO-objekt
+ * @return PDO  Objektet som returneras
+ */
+function connectToDb()
+{
   // Definierar konstanter med användarinformation.
-  define ('DB_USER', 'world');
-  define ('DB_PASSWORD', '12345');
-  define ('DB_HOST', 'mariadb'); // mariadb om docker annars localhost
-  define ('DB_NAME', 'gyprojekt');
- 
+  define('DB_USER', 'world');
+  define('DB_PASSWORD', '12345');
+  define('DB_HOST', 'mariadb'); // mariadb om docker annars localhost
+  define('DB_NAME', 'gyprojekt');
+
   // Skapar en anslutning till MySql och databasen egytalk
   $dsn = 'mysql:host=' . DB_HOST . ';dbname=' . DB_NAME . ';charset=utf8';
   $db = new PDO($dsn, DB_USER, DB_PASSWORD);
- 
+
   return $db;
 }
 
-function addUser($email, $user, $pwd){
+function addUser($email, $user, $pwd)
+{
   $db = connectToDb();
   /* Bygger upp sql frågan */
-  $stmt= $db->prepare("INSERT INTO users(uid, username, email, password) VALUES(UUID(), :user, :fn, :pwd)"); /* inanför prepare är sql frågan */
- 
+  $stmt = $db->prepare("INSERT INTO users(uid, username, email, password) VALUES(UUID(), :user, :fn, :pwd)"); /* inanför prepare är sql frågan */
+
   $stmt->bindValue(":user", $user);
   $stmt->bindValue(":fn", $email);
   $stmt->bindValue(":pwd", $pwd);
- 
-  if($stmt->execute())
+
+  if ($stmt->execute())
     return true;
   else
     return false;
 }
 
-function checkAvailability($email, $user) {
-//lös detta innan nästa steg
+function checkAvailability($email, $user)
+{
+  //lös detta innan nästa steg
 
-$db = connectToDb();
-/* Bygger upp sql frågan */
-$stmt= $db->prepare("SELECT * FROM users WHERE username = :user");
-$stmt->bindValue(":user", $user);
-$emailStmt= $db->prepare("SELECT * FROM users WHERE email = :email");
-$emailStmt->bindValue(":email", $email);
-
-$stmt->execute();
-$emailStmt->execute();
-
-$result['Eavailable'] = false;
-$result['Uavailable'] = false;
-
-/** Kontroll att resultat finns */
-if($stmt->rowCount() == 0){
-  $result['Uavailable'] = true;
-}
-if($emailStmt->rowCount() == 0){
-  $result['Eavailable'] = true;
-}
-
-
-return $result;
-}
-
-
-function auth($user, $pwd){
   $db = connectToDb();
   /* Bygger upp sql frågan */
-  $stmt= $db->prepare("SELECT * FROM users WHERE username = :user");
+  $stmt = $db->prepare("SELECT * FROM users WHERE username = :user");
   $stmt->bindValue(":user", $user);
- 
+  $emailStmt = $db->prepare("SELECT * FROM users WHERE email = :email");
+  $emailStmt->bindValue(":email", $email);
+
+  $stmt->execute();
+  $emailStmt->execute();
+
+  $result['Eavailable'] = false;
+  $result['Uavailable'] = false;
+
+  /** Kontroll att resultat finns */
+  if ($stmt->rowCount() == 0) {
+    $result['Uavailable'] = true;
+  }
+  if ($emailStmt->rowCount() == 0) {
+    $result['Eavailable'] = true;
+  }
+
+
+  return $result;
+}
+
+
+function auth($user, $pwd)
+{
+  $db = connectToDb();
+  /* Bygger upp sql frågan */
+  $stmt = $db->prepare("SELECT * FROM users WHERE username = :user");
+  $stmt->bindValue(":user", $user);
+
   $stmt->execute();
 
   $result['success'] = false;
- 
+
   /** Kontroll att resultat finns */
-  if($stmt->rowCount() == 1){
+  if ($stmt->rowCount() == 1) {
     // Hämtar användaren, kan endast kunna vara 1 person
     $user = $stmt->fetch(PDO::FETCH_ASSOC);
     // Kontrollerar lösenordet, och allt ok.
-    if(password_verify($pwd, $user['password'])){
+    if (password_verify($pwd, $user['password'])) {
       $result['success'] = true;
       $result['uid'] = $user['uid'];
       $result['username'] = $user['username'];
@@ -86,6 +91,3 @@ function auth($user, $pwd){
 
   return $result;
 }
-
-
-?>
