@@ -4,8 +4,15 @@ if(isset($_POST['email'],$_POST['userName'],$_POST['pwd'])){
     $email = filter_input(INPUT_POST, 'email', FILTER_SANITIZE_SPECIAL_CHARS);
     $user = filter_input(INPUT_POST, 'userName', FILTER_SANITIZE_SPECIAL_CHARS);
     $pwd = password_hash($_POST['pwd'], PASSWORD_DEFAULT);
+
+    if(checkAvailability($email, $user)) {
+        $result = addUser($email, $user, $pwd);
+    }
+    else{
+        echo "<p>användare finns redan</p>";
+    }
     
-    $result = addUser($email, $user, $pwd);
+
 
     // Om INSERT gick bra! Om man användarnamn är upptaget fungerar inte insert
     if($result=true){

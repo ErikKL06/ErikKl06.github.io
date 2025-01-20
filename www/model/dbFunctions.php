@@ -32,6 +32,10 @@ function addUser($email, $user, $pwd){
     return false;
 }
 
+function checkAvailability($email, $user) {
+//lös detta innan nästa steg
+}
+
 function auth($user, $pwd){
   $db = connectToDb();
   /* Bygger upp sql frågan */
