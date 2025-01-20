@@ -10,6 +10,7 @@ if(isset($_POST['email'],$_POST['userName'],$_POST['pwd'])){
     //tar eventuella felmeddelanden
     if($result=true){
         echo "<p>Användaren är tillagd</p>";
+        echo "<p><a href='login.php'>Logga in</a></p>";
     }else{
         echo "<p>Kunde inte lägga till användaren. Kontrollera användarnamnet</p>";
     }
