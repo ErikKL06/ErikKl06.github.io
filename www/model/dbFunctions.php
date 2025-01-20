@@ -20,7 +20,7 @@ function connectToDb(){
 function addUser($email, $user, $pwd){
   $db = connectToDb();
   /* Bygger upp sql frågan */
-  $stmt= $db->prepare("INSERT INTO users(uid, username, email, password) VALUES(UUID(), :user, :fn, :pwd)");
+  $stmt= $db->prepare("INSERT INTO users(uid, username, email, password) VALUES(UUID(), :user, :fn, :pwd)"); /* inanför prepare är sql frågan */
  
   $stmt->bindValue(":user", $user);
   $stmt->bindValue(":fn", $email);

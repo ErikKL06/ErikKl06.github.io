@@ -8,9 +8,8 @@ if (isset($_POST['password'], $_POST['user'])) {
 	$user = auth($user, $pwd);
 
 
-
 	/** Kontroll att resultat finns */
-	if ($auth['success']) {
+	if ($user['success']) {
 
 		$_SESSION['uid'] = $user['uid'];
 		$_SESSION['username'] = $user['username'];

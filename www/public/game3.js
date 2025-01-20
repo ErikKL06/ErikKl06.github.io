@@ -25,10 +25,13 @@ let gameOver = false;
 
 // Load images for the snake and the food
 let snakeImage = new Image();
-snakeImage.src = 'img/greenS.jpg'; // Replace with the path to your snake image
+snakeImage.src = 'img/head.png'; // Replace with the path to your snake image
 
 let foodImage = new Image();
-foodImage.src = 'img/greenS.jpg'; // Replace with the path to your food image
+foodImage.src = 'img/IdasApple.png'; // Replace with the path to your food image
+
+let snakeBodyImage = new Image();
+snakeBodyImage.src = 'img/Sbody.png'; // Replace with the path to your snake body image
 
 let re = document.getElementById("re");
 
