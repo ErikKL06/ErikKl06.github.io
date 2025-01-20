@@ -20,11 +20,11 @@ if(isset($_POST['email'],$_POST['userName'],$_POST['pwd'])){
 
     // Om INSERT gick bra! Om man användarnamn är upptaget fungerar inte insert
     if($result=true){
-        header('Location: addUserForm.html');
+       // header('Location: addUserForm.html');
+       //fixa fixaa fixa fixa
     }else{
         header('Content-Type: text/html; charset=utf-8');
         echo "<p>Kunde inte lägga till användaren. Kontrollera användarnamnet</p>";
-        echo "<a href = 'addUserForm.html'>Försök igen</a>";
     }
 }
 ?>
