@@ -35,6 +35,32 @@ function addUser($email, $user, $pwd)
     return false;
 }
 
+function getHighscore($user){
+  $db = connectToDb();
+  $stmt = $db->prepare("SELECT * FROM highscore WHERE score = :score AND user = :user");
+  $stmt->bindValue(":user", $user);
+
+  $stmt->execute();
+
+  if ($stmt->rowCount() == 1) {
+    $result = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $result;
+  } else {
+    return false;
+  }
+}
+
+function setHighscore($user, $score){
+  $db = connectToDb();
+  $stmt = $db->prepare("INSERT INTO highscore(score, user) VALUES(:score, :user)");
+  $stmt->bindValue(":score", $_POST['score']);
+  $stmt->bindValue(":user", $_POST['user']);
+
+  if ($stmt->execute())
+    return true;
+  else
+    return false;
+}
 
 function auth($user, $pwd)
 {

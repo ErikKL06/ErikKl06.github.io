@@ -35,10 +35,11 @@ snakeBodyImage.src = 'img/Sbody.png'; // Replace with the path to your snake bod
 
 let re = document.getElementById("re");
 
+
 let highscore = 0;
 
 let score = document.getElementById("score");
-score.innerHTML = "Score: " + highscore;
+score.innerHTML = "Score: " + score;
 
 
 // Variable to store the rotation angle
@@ -66,6 +67,9 @@ window.onload = function () {
 function update() {
     // If the game is over, exit the function
     if (gameOver) {
+        if (highscore < score) {
+            highscore = score;
+        }
         return;
     }
 
