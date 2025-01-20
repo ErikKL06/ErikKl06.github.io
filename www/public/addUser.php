@@ -7,7 +7,7 @@ if(isset($_POST['email'],$_POST['userName'],$_POST['pwd'])){
     $result = addUser($email, $user, $pwd);
 
 
-    //tar evenruella felmeddelanden
+    //tar eventuella felmeddelanden
     if($result=true){
         echo "<p>Användaren är tillagd</p>";
     }else{
