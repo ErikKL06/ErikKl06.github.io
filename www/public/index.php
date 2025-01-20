@@ -20,7 +20,7 @@
    <h1>Spel</h1>
    <p id="score"></p>
    <button type="button" id="re">Omstart</button>
-   <canvas id="board" width="500rem" height="500rem" style="border: 1px solid black;">
+   <canvas id="board" width="450rem" height="450rem" style="border: 1px solid black;">
    Din webbläsare stödjer inte HTML5 canvas tag.</canvas>
    <section id="status">
       <p id="userStatus">Utloggad</p>

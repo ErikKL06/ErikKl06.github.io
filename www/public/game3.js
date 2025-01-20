@@ -1,9 +1,9 @@
 //board
-let blockSize = 25;
-let rows = 20;
-let cols = 20;
+let blockSize = 30;
+let rows = 15;
+let cols = 15;
 let board;
-let context; 
+let context;
 
 //snake head
 let snakeX = blockSize * 5;
@@ -45,7 +45,7 @@ score.innerHTML = "Score: " + highscore;
 let rotationVinkel = 0;
 
 // Function to initialize the game when the window loads
-window.onload = function() {
+window.onload = function () {
     // Get the canvas element and its context for drawing
     board = document.getElementById("board");
     context = board.getContext("2d");
@@ -57,7 +57,7 @@ window.onload = function() {
     document.addEventListener("keyup", changeDirection);
 
     // Call the update function every 100 milliseconds to update the game state
-    setInterval(update, 1000/10);
+    setInterval(update, 1000 / 10);
     re.addEventListener("click", restart);
 
 }
@@ -73,6 +73,8 @@ function update() {
     // Draw the food image
     context.drawImage(foodImage, foodX, foodY, blockSize, blockSize);
 
+    renderGrid(); //ritar ut rutnätet
+
     checkFood();  //kollar om maten är uppäten
 
     moveSnake(); //flyttar ormen
@@ -84,6 +86,30 @@ function update() {
     checkGameOver(); //kollar om spelet är över
 
 }
+function renderGrid() {
+    const xMax = board.width;  // Width of the canvas
+    const yMax = board.height; // Height of the canvas
+    const gridSize = 30;       // Spacing between grid lines
+
+    // Draw the grid
+    context.beginPath();
+    context.strokeStyle = "lightgray"; // Grid line color
+
+    // Vertical grid lines
+    for (let x = 0; x <= xMax; x += gridSize) {
+        context.moveTo(x, 0);         // Move to the top of the column
+        context.lineTo(x, yMax);      // Draw to the bottom of the column
+    }
+
+    // Horizontal grid lines
+    for (let y = 0; y <= yMax; y += gridSize) {
+        context.moveTo(0, y);         // Move to the start of the row
+        context.lineTo(xMax, y);      // Draw to the end of the row
+    }
+
+    context.stroke(); // Render all the grid lines
+}
+
 
 // Function to change the snake's direction based on key presses
 function changeDirection(e) {
@@ -106,46 +132,46 @@ function changeDirection(e) {
     }
 }
 
-function clearboard(){
-        // Clear the board by filling it with a black rectangle
-        context.fillStyle = "black";
-        context.fillRect(0, 0, board.width, board.height);
+function clearboard() {
+    // Clear the board by filling it with a black rectangle
+    context.fillStyle = "black";
+    context.fillRect(0, 0, board.width, board.height);
 
 }
 
-function checkFood(){
-        // Check if the snake has eaten the food
-        if (snakeX == foodX && snakeY == foodY) {
-            // Add a new segment to the snake's body
-            snakeBody.push([foodX, foodY]);
-            highscore++;
-            updateScore();
-    
-            // Place a new food item on the board
-            placeFood();
-        }
+function checkFood() {
+    // Check if the snake has eaten the food
+    if (snakeX == foodX && snakeY == foodY) {
+        // Add a new segment to the snake's body
+        snakeBody.push([foodX, foodY]);
+        highscore++;
+        updateScore();
+
+        // Place a new food item on the board
+        placeFood();
+    }
 }
-function updateScore(){
+function updateScore() {
     score.innerHTML = "Score: " + highscore;
 }
 
-function moveSnake(){
-        // Move the snake's body segments
-        for (let i = snakeBody.length - 1; i > 0; i--) {
-            snakeBody[i] = snakeBody[i - 1];
-        }
-        if (snakeBody.length) {
-            snakeBody[0] = [snakeX, snakeY];
-        }
+function moveSnake() {
+    // Move the snake's body segments
+    for (let i = snakeBody.length - 1; i > 0; i--) {
+        snakeBody[i] = snakeBody[i - 1];
+    }
+    if (snakeBody.length) {
+        snakeBody[0] = [snakeX, snakeY];
+    }
 }
 
-function updateSnake(){
-        // Update the snake's position based on its velocity
-        snakeX += velocityX * blockSize;
-        snakeY += velocityY * blockSize;
+function updateSnake() {
+    // Update the snake's position based on its velocity
+    snakeX += velocityX * blockSize;
+    snakeY += velocityY * blockSize;
 }
 
-function drawSnake(){
+function drawSnake() {
     // Draw the snake's head with rotation
     context.save();
     context.translate(snakeX + blockSize / 2, snakeY + blockSize / 2);
@@ -160,19 +186,19 @@ function drawSnake(){
 
 }
 
-function checkGameOver(){
-        // Check for game over conditions
-        if (snakeX < 0 || snakeX > cols * blockSize || snakeY < 0 || snakeY > rows * blockSize) {
+function checkGameOver() {
+    // Check for game over conditions
+    if (snakeX < 0 || snakeX > cols * blockSize || snakeY < 0 || snakeY > rows * blockSize) {
+        gameOver = true;
+        alert("Game Over");
+    }
+
+    for (let i = 0; i < snakeBody.length; i++) {
+        if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
             gameOver = true;
             alert("Game Over");
         }
-    
-        for (let i = 0; i < snakeBody.length; i++) {
-            if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
-                gameOver = true;
-                alert("Game Over");
-            }
-        }
+    }
 }
 
 // Function to place a new food item on the board at a random position
@@ -182,11 +208,12 @@ function placeFood() {
     foodY = Math.floor(Math.random() * rows) * blockSize;
 }
 
-function restart(){
+function restart() {
     snakeX = blockSize * 5;
     snakeY = blockSize * 5;
     velocityX = 0;
     velocityY = 0;
+    highscore = 0;
     snakeBody = [];
     gameOver = false;
     placeFood();
