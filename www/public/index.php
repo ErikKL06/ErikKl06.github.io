@@ -18,6 +18,7 @@
    	 }
     ?>
    <h1>Spel</h1>
+   <p id="score"></p>
    <button type="button" id="re">Omstart</button>
    <canvas id="board" width="500rem" height="500rem" style="border: 1px solid black;">
    Din webbläsare stödjer inte HTML5 canvas tag.</canvas>

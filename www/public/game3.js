@@ -24,8 +24,8 @@ let foodY;
 let gameOver = false;
 
 // Load images for the snake and the food
-let snakeImage = new Image();
-snakeImage.src = 'img/head.png'; // Replace with the path to your snake image
+let snakeHead = new Image();
+snakeHead.src = 'img/head.png'; // Replace with the path to your snake image
 
 let foodImage = new Image();
 foodImage.src = 'img/IdasApple.png'; // Replace with the path to your food image
@@ -35,7 +35,14 @@ snakeBodyImage.src = 'img/Sbody.png'; // Replace with the path to your snake bod
 
 let re = document.getElementById("re");
 
+let highscore = 0;
 
+let score = document.getElementById("score");
+score.innerHTML = "Score: " + highscore;
+
+
+// Variable to store the rotation angle
+let rotationVinkel = 0;
 
 // Function to initialize the game when the window loads
 window.onload = function() {
@@ -83,15 +90,19 @@ function changeDirection(e) {
     if (e.code == "ArrowUp" && velocityY != 1) {
         velocityX = 0;
         velocityY = -1;
+        rotationVinkel = 0; // Set the angle to -90 degrees
     } else if (e.code == "ArrowDown" && velocityY != -1) {
         velocityX = 0;
         velocityY = 1;
+        rotationVinkel = 180; // Set the angle to 90 degrees
     } else if (e.code == "ArrowLeft" && velocityX != 1) {
         velocityX = -1;
         velocityY = 0;
+        rotationVinkel = 270; // Set the angle to 180 degrees
     } else if (e.code == "ArrowRight" && velocityX != -1) {
         velocityX = 1;
         velocityY = 0;
+        rotationVinkel = 90; // Set the angle to 0 degrees
     }
 }
 
@@ -107,10 +118,15 @@ function checkFood(){
         if (snakeX == foodX && snakeY == foodY) {
             // Add a new segment to the snake's body
             snakeBody.push([foodX, foodY]);
+            highscore++;
+            updateScore();
     
             // Place a new food item on the board
             placeFood();
         }
+}
+function updateScore(){
+    score.innerHTML = "Score: " + highscore;
 }
 
 function moveSnake(){
@@ -130,12 +146,16 @@ function updateSnake(){
 }
 
 function drawSnake(){
-    // Draw the snake head image
-    context.drawImage(snakeImage, snakeX, snakeY, blockSize, blockSize);
+    // Draw the snake's head with rotation
+    context.save();
+    context.translate(snakeX + blockSize / 2, snakeY + blockSize / 2);
+    context.rotate(rotationVinkel * Math.PI / 180);
+    context.drawImage(snakeHead, -blockSize / 2, -blockSize / 2, blockSize, blockSize);
+    context.restore();
 
-    // Draw the snake body segments
+    // Draw the snake's body segments
     for (let i = 0; i < snakeBody.length; i++) {
-        context.drawImage(snakeImage, snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
+        context.drawImage(snakeBodyImage, snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
 
 }
