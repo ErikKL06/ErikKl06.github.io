@@ -35,35 +35,6 @@ function addUser($email, $user, $pwd)
     return false;
 }
 
-function checkAvailability($email, $user)
-{
-  //lös detta innan nästa steg
-
-  $db = connectToDb();
-  /* Bygger upp sql frågan */
-  $stmt = $db->prepare("SELECT * FROM users WHERE username = :user");
-  $stmt->bindValue(":user", $user);
-  $emailStmt = $db->prepare("SELECT * FROM users WHERE email = :email");
-  $emailStmt->bindValue(":email", $email);
-
-  $stmt->execute();
-  $emailStmt->execute();
-
-  $result['Eavailable'] = false;
-  $result['Uavailable'] = false;
-
-  /** Kontroll att resultat finns */
-  if ($stmt->rowCount() == 0) {
-    $result['Uavailable'] = true;
-  }
-  if ($emailStmt->rowCount() == 0) {
-    $result['Eavailable'] = true;
-  }
-
-
-  return $result;
-}
-
 
 function auth($user, $pwd)
 {
