@@ -18,13 +18,17 @@
    	 }
     ?>
    <h1>Spel</h1>
-   <p id="score"></p>
-   <p id="highscore"></p>
+   <p id="score">Score:</p>
+   <p id="highscoreHTML">Highscore:</p>
    <button type="button" id="re">Omstart</button>
    <canvas id="board" width="450rem" height="450rem" style="border: 1px solid black;">
    Din webbläsare stödjer inte HTML5 canvas tag.</canvas>
+   
+   <!--
    <section id="status">
-      <p id="userStatus">Utloggad</p>
+      <p id="userStatus">Utloggad</p> 
    </section>
+      -->
+
 </body>
 </html>

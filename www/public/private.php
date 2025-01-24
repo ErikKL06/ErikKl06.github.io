@@ -7,7 +7,8 @@
 </head>
 <body>
     <section>
-        <p>Du är inloggad</p>
+        <?php echo "user: " . $_SESSION['username']; ?>
+        <a href="loggout.php">Logga ut</a>
     </section>
 </body>
 </html>

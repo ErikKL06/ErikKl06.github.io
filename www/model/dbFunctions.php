@@ -35,26 +35,26 @@ function addUser($email, $user, $pwd)
     return false;
 }
 
-function getHighscore($user){
+function getHighscore($uid){
   $db = connectToDb();
-  $stmt = $db->prepare("SELECT * FROM highscore WHERE score = :score AND user = :user");
-  $stmt->bindValue(":user", $user);
+  $stmt = $db->prepare("SELECT highscore FROM users WHERE uid = :uid");
+  $stmt->bindValue(":uid", $uid);
 
   $stmt->execute();
 
   if ($stmt->rowCount() == 1) {
     $result = $stmt->fetch(PDO::FETCH_ASSOC);
-    return $result;
+    return $result['highscore'];
   } else {
-    return false;
+    return $result['highscore'] = 0;
   }
 }
 
-function setHighscore($user, $score){
+function setHighscore($uid, $score){
   $db = connectToDb();
-  $stmt = $db->prepare("INSERT INTO highscore(score, user) VALUES(:score, :user)");
+  $stmt = $db->prepare("INSERT INTO highscore(score, uid) VALUES(:score, :uid)");
   $stmt->bindValue(":score", $_POST['score']);
-  $stmt->bindValue(":user", $_POST['user']);
+  $stmt->bindValue(":uid", $_POST['uid']);
 
   if ($stmt->execute())
     return true;

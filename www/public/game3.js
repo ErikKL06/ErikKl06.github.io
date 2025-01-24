@@ -38,6 +38,7 @@ let re = document.getElementById("re");
 
 let highscore = 0;
 
+
 let score = document.getElementById("score");
 score.innerHTML = "Score: " + score;
 
@@ -65,6 +66,7 @@ window.onload = function () {
 
 // Function to update the game state
 function update() {
+    fetchHighscore();
     // If the game is over, exit the function
     if (gameOver) {
         if (highscore < score) {
@@ -223,3 +225,21 @@ function restart() {
     placeFood();
     alert("Game Restarted");
 }
+
+
+async function fetchHighscore() {
+    const url = "http://localhost/api/getHighscore.php";
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`Response status: ${response.status}`);
+      }
+  
+      const highscore = await response.json();
+      highscoreHTML = document.getElementById("highscoreHTML");
+      highscoreHTML.innerHTML = "Highscore: " + highscore;
+    } catch (error) {
+      console.error(error.message);
+    }
+
+  }
