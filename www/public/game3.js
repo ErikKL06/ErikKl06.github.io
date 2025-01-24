@@ -35,13 +35,13 @@ snakeBodyImage.src = 'img/Sbody.png'; // Replace with the path to your snake bod
 
 let re = document.getElementById("re");
 
-
-let highscore = 0;
+let highscore = fetchHighscore();
+let gamescore = 0;
 
 
 
 let score = document.getElementById("score");
-score.innerHTML = "Score: " + score;
+score.innerHTML = "Score: " + gamescore;
 
 
 // Variable to store the rotation angle
@@ -67,13 +67,9 @@ window.onload = function () {
 
 // Function to update the game state
 function update() {
-    fetchHighscore();
     // If the game is over, exit the function
     if (gameOver) {
-        if (highscore <= score) {
-            highscore = score;
-            $_POST['highscore'] = highscore;
-        }
+
         return;
     }
 
@@ -152,7 +148,7 @@ function checkFood() {
     if (snakeX == foodX && snakeY == foodY) {
         // Add a new segment to the snake's body
         snakeBody.push([foodX, foodY]);
-        highscore++;
+        gamescore += 1;
         updateScore();
 
         // Place a new food item on the board
@@ -160,7 +156,11 @@ function checkFood() {
     }
 }
 function updateScore() {
-    score.innerHTML = "Score: " + highscore;
+    score.innerHTML = "Score: " + gamescore;
+}
+function updateHighscore() {
+    let highscoreHTML = document.getElementById("highscoreHTML");
+    highscoreHTML.innerHTML = "Highscore: " + highscore;
 }
 
 function moveSnake() {
@@ -198,13 +198,27 @@ function checkGameOver() {
     // Check for game over conditions
     if (snakeX < 0 || snakeX >= cols * blockSize || snakeY < 0 || snakeY >= rows * blockSize) {
         gameOver = true;
+        if (highscore < gamescore) {
+            setHighscore(gamescore);
+            highscore = gamescore;
+            updateHighscore();
+            
+        }
         alert("Game Over");
+
     }
 
     for (let i = 0; i < snakeBody.length; i++) {
         if (snakeX == snakeBody[i][0] && snakeY == snakeBody[i][1]) {
             gameOver = true;
+            if (highscore < gamescore) {
+                setHighscore(gamescore);
+                highscore = gamescore;
+                updateHighscore();
+                
+            }
             alert("Game Over");
+
         }
     }
 }
@@ -221,39 +235,47 @@ function restart() {
     snakeY = blockSize * 5;
     velocityX = 0;
     velocityY = 0;
-    highscore = 0;
+    highscore = fetchHighscore();
     snakeBody = [];
     gameOver = false;
     placeFood();
-    alert("Game Restarted");
+    gamescore = 0;
+
 }
 
 
 async function fetchHighscore() {
     try {
-      const response = await fetch("http://localhost/api/getHighscore.php");
-      if (!response.ok) {
-        throw new Error(`Response status: ${response.status}`);
-      }
-  
-      const highscore = await response.json();
-      highscoreHTML = document.getElementById("highscoreHTML");
-      highscoreHTML.innerHTML = "Highscore: " + highscore;
+        const response = await fetch("http://localhost/api/getHighscore.php");
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        highscore = parseInt(result);
+        updateHighscore();
+        console.log('Highscore:', highscore);
+
 
     } catch (error) {
-      console.error(error.message);
+        console.error(error.message);
     }
 
-  }
+}
 
-  //koppla med api
+async function setHighscore(highscore) {
+    console.log('Sending highscore:', highscore);
+    const response = await fetch("http://localhost/api/setHighscore.php", {
+        method: "POST",
+        body: JSON.stringify({ highscore: highscore }),
+        headers: {
+            "Content-type": "application/json; charset=UTF-8"
+        }
+    });
+    console.log('Response status:', response.status);
+    const data = await response.json();
+    console.log('Response data:', data);
 
-  async function getCountries(){
-    const response = await fetch("getcountry.php");
-    const country = await response.json();
-    
+}
 
-  }
 
-  let country = {"Name:": " Sweden", "population": 100000};
-  {country.population};
