@@ -21,7 +21,7 @@
    <p id="score">Score:</p>
    <p id="highscoreHTML">Highscore:</p>
    <button type="button" id="re">Omstart</button>
-   <canvas id="board" width="450rem" height="450rem" style="border: 1px solid black;">
+   <canvas id="board" width="450rem" height="450rem">
    Din webbläsare stödjer inte HTML5 canvas tag.</canvas>
    
    <!--
