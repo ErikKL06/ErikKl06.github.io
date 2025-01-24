@@ -1,16 +1,23 @@
-<?php       
-    include("../../model/dbFunctions.php");
-    
-    session_start();
+<?php
+include("../../inc/db.inc.php");
+
+session_start();
+
+$input = json_decode(file_get_contents("../test.js"), true);
+
+if((isset($_SESSION['uid'])) && (isset($input['highscore']))){
+    $highscore = (int)$input['highscore'];
+    //$highscore = 3;
+    $sqlkod = "UPDATE users SET highscore = :highscore WHERE uid = :uid";
+    $stmt = $db->prepare($sqlkod);
+    $stmt->bindValue(':uid', $_SESSION['uid']);
+    $stmt->bindValue(':highscore', $highscore, PDO::PARAM_INT);
+    echo $score;
+    $stmt->execute();
+}else{
+}
 
 
-    // Kolla session med uid
-    if(isset($_SESSION['uid'])){
-        //$result = getHighscore($_SESSION['uid']);
-        $result = (int)getHighscore('33f6649e-d72a-11ef-ba2d-0242ac141002');
-    }else{
-        $result = 0;
-    }
 
-    echo json_decode($result);
-?>
+
+

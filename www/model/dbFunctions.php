@@ -50,9 +50,9 @@ function getHighscore($uid){
   }
 }
 
-function setHighscore($uid, $score){
+function setHighscore($uid, $score){ //bara score behövs uid kollas i api:n.
   $db = connectToDb();
-  $stmt = $db->prepare("INSERT INTO highscore(score, uid) VALUES(:score, :uid)");
+  $stmt = $db->prepare("INSERT INTO highscore(highscore, uid) VALUES(:highscore, :uid)");
   $stmt->bindValue(":score", $_POST['score']);
   $stmt->bindValue(":uid", $_POST['uid']);
 

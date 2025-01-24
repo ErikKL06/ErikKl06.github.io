@@ -39,6 +39,7 @@ let re = document.getElementById("re");
 let highscore = 0;
 
 
+
 let score = document.getElementById("score");
 score.innerHTML = "Score: " + score;
 
@@ -69,8 +70,9 @@ function update() {
     fetchHighscore();
     // If the game is over, exit the function
     if (gameOver) {
-        if (highscore < score) {
+        if (highscore <= score) {
             highscore = score;
+            $_POST['highscore'] = highscore;
         }
         return;
     }
@@ -228,9 +230,8 @@ function restart() {
 
 
 async function fetchHighscore() {
-    const url = "http://localhost/api/getHighscore.php";
     try {
-      const response = await fetch(url);
+      const response = await fetch("http://localhost/api/getHighscore.php");
       if (!response.ok) {
         throw new Error(`Response status: ${response.status}`);
       }
@@ -238,8 +239,21 @@ async function fetchHighscore() {
       const highscore = await response.json();
       highscoreHTML = document.getElementById("highscoreHTML");
       highscoreHTML.innerHTML = "Highscore: " + highscore;
+
     } catch (error) {
       console.error(error.message);
     }
 
   }
+
+  //koppla med api
+
+  async function getCountries(){
+    const response = await fetch("getcountry.php");
+    const country = await response.json();
+    
+
+  }
+
+  let country = {"Name:": " Sweden", "population": 100000};
+  {country.population};
