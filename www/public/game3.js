@@ -69,7 +69,6 @@ window.onload = function () {
 function update() {
     // If the game is over, exit the function
     if (gameOver) {
-
         return;
     }
 
@@ -202,9 +201,10 @@ function checkGameOver() {
             setHighscore(gamescore);
             highscore = gamescore;
             updateHighscore();
-            
+
         }
         alert("Game Over");
+        restart();
 
     }
 
@@ -215,19 +215,32 @@ function checkGameOver() {
                 setHighscore(gamescore);
                 highscore = gamescore;
                 updateHighscore();
-                
+
             }
             alert("Game Over");
-
+            restart();
         }
     }
 }
 
 // Function to place a new food item on the board at a random position
 function placeFood() {
-    // Generate random coordinates for the food within the bounds of the board
-    foodX = Math.floor(Math.random() * cols) * blockSize;
-    foodY = Math.floor(Math.random() * rows) * blockSize;
+    let validPosition = false;
+
+    while (!validPosition) {
+        // Generate random coordinates for the food within the bounds of the board
+        foodX = Math.floor(Math.random() * cols) * blockSize;
+        foodY = Math.floor(Math.random() * rows) * blockSize;
+
+        // Check if the generated coordinates overlap with any part of the snake's body
+        validPosition = true;
+        for (let i = 0; i < snakeBody.length; i++) {
+            if (foodX === snakeBody[i][0] && foodY === snakeBody[i][1]) {
+                validPosition = false;
+                break;
+            }
+        }
+    }
 }
 
 function restart() {
