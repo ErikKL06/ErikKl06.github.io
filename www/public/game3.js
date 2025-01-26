@@ -60,7 +60,7 @@ window.onload = function () {
     document.addEventListener("keyup", changeDirection);
 
     // Call the update function every 100 milliseconds to update the game state
-    setInterval(update, 1000 / 8);
+    setInterval(update, 1000 / 6);
     re.addEventListener("click", restart);
 
 }
