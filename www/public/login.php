@@ -24,6 +24,7 @@ if (isset($_POST['password'], $_POST['user'])) {
 
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" href="style.css">
 	<title>Sessioner</title>
 </head>
 
