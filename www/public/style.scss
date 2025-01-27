@@ -1,9 +1,34 @@
 html {
-    background-color: rgb(255, 255, 255);
+    background-color: #A3B18A;
+    margin: 0;
+    padding: 0;
+
+    h1 {
+        display: block;
+        text-align: center;
+    }
+    #scores {
+        display: block;
+        text-align: center;
+    }
+    .links {
+        text-decoration: none;
+        text-decoration-line: underline;
+        color: #344E41;
+        
+
+    }
+    #loginStatus {
+        display: block;
+        text-align: right;
+    }
 
     #board {
         display: block;
-        border: solid 1rem rgb(225, 52, 52);
+        border: solid 0.25rem #344E41;
+        border-radius: 0.6rem;
+        margin: 0 auto;
+        box-shadow: 0.25rem 0.25rem 0.25rem #3A5A40;
     }
 
 }

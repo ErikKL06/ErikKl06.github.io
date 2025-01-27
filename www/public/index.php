@@ -1,6 +1,7 @@
 <?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
    <meta charset="UTF-8">
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,27 +9,28 @@
    <link rel="stylesheet" href="style.css">
    <title>Document</title>
 </head>
+
 <body>
-   <?php    
-   	 if(isset($_SESSION['uid'])){
-   		 include 'private.php';
-   		 
-   	 }else{
-   		 include 'public.php';
-   	 }
-    ?>
-   <h1>Spel</h1>
-   <p id="score">Score:</p>
-   <p id="highscoreHTML">Highscore:</p>
+   <h1>Snake</h1>
+   <section id="scores">
+      <p id="score">Score:</p>
+      <p id="highscoreHTML">Highscore:</p>
+   </section>
+
    <button type="button" id="re">Omstart</button>
    <canvas id="board" width="450rem" height="450rem">
-   Din webbläsare stödjer inte HTML5 canvas tag.</canvas>
-   
-   <!--
-   <section id="status">
-      <p id="userStatus">Utloggad</p> 
+      Din webbläsare stödjer inte HTML5 canvas tag.</canvas>
+   <section id="loginStatus">
+      <?php
+      if (isset($_SESSION['uid'])) {
+         include 'private.php';
+      } else {
+         include 'public.php';
+      }
+      ?>
    </section>
-      -->
+
 
 </body>
+
 </html>

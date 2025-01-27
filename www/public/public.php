@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Document</title>
 </head>
 <body>
-    <a href="login.php">Logga in</a>
-    <a href="signup.html">Registrera</a>
+    <a href="login.php" class="links">Logga in</a>
+    <a href="signup.html" class="links">Registrera</a>
 </body>
 </html>

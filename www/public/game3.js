@@ -96,7 +96,7 @@ function renderGrid() {
 
     // Draw the grid
     context.beginPath();
-    context.strokeStyle = "lightgray"; // Grid line color
+    context.strokeStyle = "#3A5A40"; // Grid line color
 
     // Vertical grid lines
     for (let x = 0; x <= xMax; x += gridSize) {
@@ -137,7 +137,7 @@ function changeDirection(e) {
 
 function clearboard() {
     // Clear the board by filling it with a black rectangle
-    context.fillStyle = "black";
+    context.fillStyle = "#588157";
     context.fillRect(0, 0, board.width, board.height);
 
 }
