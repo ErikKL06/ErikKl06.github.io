@@ -38,6 +38,8 @@ let re = document.getElementById("re");
 let highscore = fetchHighscore();
 let gamescore = 0;
 
+let directionChanged = false;
+
 
 
 let score = document.getElementById("score");
@@ -88,6 +90,8 @@ function update() {
 
     checkGameOver(); //kollar om spelet är över
 
+    directionChanged = false;
+
 }
 function renderGrid() {
     const xMax = board.width;  // Width of the canvas
@@ -116,22 +120,29 @@ function renderGrid() {
 
 // Function to change the snake's direction based on key presses
 function changeDirection(e) {
+
+    if (directionChanged) return; // Prevent multiple direction changes in one update cycle
+
     if (e.code == "ArrowUp" && velocityY != 1) {
         velocityX = 0;
         velocityY = -1;
         rotationVinkel = 0; // Set the angle to -90 degrees
+        directionChanged = true;
     } else if (e.code == "ArrowDown" && velocityY != -1) {
         velocityX = 0;
         velocityY = 1;
         rotationVinkel = 180; // Set the angle to 90 degrees
+        directionChanged = true;
     } else if (e.code == "ArrowLeft" && velocityX != 1) {
         velocityX = -1;
         velocityY = 0;
         rotationVinkel = 270; // Set the angle to 180 degrees
+        directionChanged = true;
     } else if (e.code == "ArrowRight" && velocityX != -1) {
         velocityX = 1;
         velocityY = 0;
         rotationVinkel = 90; // Set the angle to 0 degrees
+        directionChanged = true;
     }
 }
 
