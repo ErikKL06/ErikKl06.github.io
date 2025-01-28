@@ -54,6 +54,7 @@ html body input {
   background-color: #588157;
   padding: 1rem;
   margin-bottom: 0.5rem;
+  text-align: center;
 }
 html body #board {
   display: block;
