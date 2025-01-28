@@ -29,11 +29,20 @@ if (isset($_POST['password'], $_POST['user'])) {
 </head>
 
 <body>
-	<form method="post">
-		Username: <input type="text" name="user" size="20" /><br />
-		Password: <input type="password" name="password" size="20" /><br />
-		<input type="submit" value="Logga in" name="login" />
-	</form>
+	<section class="loginSignup">
+		<h1>Logga in</h1>
+		<form method="post">
+			<label for="user">Username:</label>
+			<br>
+			<input type="text" name="user" required size="50"/>
+			<br />
+			<label for="password">Password:</label>
+			<br>
+			<input type="password" name="password" required size="50" /><br />
+			<input class="submit" type="submit" value="Logga in" name="login" />
+		</form>
+	</section>
+
 </body>
 
 </html>

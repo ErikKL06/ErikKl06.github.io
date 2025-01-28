@@ -9,7 +9,19 @@
 <body>
     <section>
         <?php echo "user: " . $_SESSION['username']; ?>
-        <a href="loggout.php" class="links">Logga ut</a>
+        <button type="button" id="loggoutB">Logga ut</button>
     </section>
 </body>
 </html>
+
+<script>
+    loggoutB.addEventListener('click', () => {
+        fetch('loggout.php')
+            .then(response => response.text())
+            .then(data => {
+                console.log(data);
+                location.reload();
+            });
+    });
+
+</script>

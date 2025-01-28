@@ -173,7 +173,7 @@ function updateHighscore() {
     highscoreHTML.innerHTML = "Highscore: " + highscore;
 }
 
-function moveSnake() {
+function moveSnake() { //fix för animation är 0.5 och köra movesnake() två gånger update()
     // Move the snake's body segments
     for (let i = snakeBody.length - 1; i > 0; i--) {
         snakeBody[i] = snakeBody[i - 1];

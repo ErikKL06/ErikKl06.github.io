@@ -7,7 +7,17 @@
     <title>Document</title>
 </head>
 <body>
-    <a href="login.php" class="links">Logga in</a>
-    <a href="signup.html" class="links">Registrera</a>
+    <button type="button" id="loginB">Logga in</button>
+    <button type="button" id="signupB">Registrera</button>
 </body>
 </html>
+
+<script>
+    loginB.addEventListener('click', () => {
+        location.href = "login.php";
+    });
+
+    signupB.addEventListener('click', () => {
+        location.href = "signup.html";
+    });
+</script>

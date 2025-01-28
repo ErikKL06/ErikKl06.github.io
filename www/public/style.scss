@@ -2,33 +2,77 @@ html {
     background-color: #A3B18A;
     margin: 0;
     padding: 0;
+    font-size: 62.5%;
+    font-size: 1rem;
 
-    h1 {
-        display: block;
-        text-align: center;
-    }
-    #scores {
-        display: block;
-        text-align: center;
-    }
-    .links {
-        text-decoration: none;
-        text-decoration-line: underline;
-        color: #344E41;
-        
+    body {
 
-    }
-    #loginStatus {
-        display: block;
-        text-align: right;
-    }
 
-    #board {
-        display: block;
-        border: solid 0.25rem #344E41;
-        border-radius: 0.6rem;
-        margin: 0 auto;
-        box-shadow: 0.25rem 0.25rem 0.25rem #3A5A40;
+        h1 {
+            display: block;
+            text-align: center;
+        }
+
+        #scores {
+            display: block;
+            text-align: center;
+        }
+
+        #loginStatus {
+            display: block;
+            text-align: right;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            margin: 1rem;
+        }
+        button  {
+            text-decoration: none;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: #588157;
+            padding: 1rem;
+            
+            &:hover {
+                background-color: #3A5A40;
+            }
+        }
+
+        .loginSignup {
+            display: block;
+            text-align: center;
+            margin: 0 auto;
+            font-size: 1.5rem;
+        }
+        .submit{
+            text-decoration: none;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: #588157;
+            padding: 1rem;
+
+            &:hover {
+                background-color: #3A5A40;
+            }
+
+        }   
+        input {
+            text-decoration: none;
+            border: none;
+            border-radius: 0.5rem;
+            background-color: #588157;
+            padding: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        #board {
+            display: block;
+            border: solid 0.25rem #344E41;
+            border-radius: 0.6rem;
+            margin: 0 auto;
+            box-shadow: 0.25rem 0.25rem 0.25rem #3A5A40;
+        }
+
     }
 
 }

@@ -2,25 +2,60 @@ html {
   background-color: #A3B18A;
   margin: 0;
   padding: 0;
+  font-size: 62.5%;
+  font-size: 1rem;
 }
-html h1 {
+html body h1 {
   display: block;
   text-align: center;
 }
-html #scores {
+html body #scores {
   display: block;
   text-align: center;
 }
-html .links {
-  text-decoration: none;
-  text-decoration-line: underline;
-  color: #344E41;
-}
-html #loginStatus {
+html body #loginStatus {
   display: block;
   text-align: right;
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 1rem;
 }
-html #board {
+html body button {
+  text-decoration: none;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #588157;
+  padding: 1rem;
+}
+html body button:hover {
+  background-color: #3A5A40;
+}
+html body .loginSignup {
+  display: block;
+  text-align: center;
+  margin: 0 auto;
+  font-size: 1.5rem;
+}
+html body .submit {
+  text-decoration: none;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #588157;
+  padding: 1rem;
+}
+html body .submit:hover {
+  background-color: #3A5A40;
+}
+html body input {
+  text-decoration: none;
+  border: none;
+  border-radius: 0.5rem;
+  background-color: #588157;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+}
+html body #board {
   display: block;
   border: solid 0.25rem #344E41;
   border-radius: 0.6rem;
