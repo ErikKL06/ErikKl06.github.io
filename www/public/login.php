@@ -34,13 +34,19 @@ if (isset($_POST['password'], $_POST['user'])) {
 		<form method="post">
 			<label for="user">Username:</label>
 			<br>
-			<input type="text" name="user" required size="50"/>
+			<input type="text" name="user" required size="50" />
 			<br />
 			<label for="password">Password:</label>
 			<br>
 			<input type="password" name="password" required size="50" /><br />
 			<input class="submit" type="submit" value="Logga in" name="login" />
 		</form>
+	</section>
+	<section class="loginSignup">
+		<p>Inget konto?</p>
+		<a href="signup.html">
+			<button id="signupS">Registrera</button>
+		</a>
 	</section>
 
 </body>
