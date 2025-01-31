@@ -68,6 +68,9 @@ function setHighscore($score)
   else
     return false;
 }
+function getAllHighscores (){
+  
+}
 
 function auth($user, $pwd)
 {
