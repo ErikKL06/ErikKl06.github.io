@@ -68,8 +68,20 @@ function setHighscore($score)
   else
     return false;
 }
-function getAllHighscores (){
-  
+function getAllHighscores()
+{
+  $db = connectToDb();
+
+  $sqlkod = "SELECT username, highscore FROM users WHERE 1 ORDER BY highscore DESC LIMIT 5";
+  $stmt = $db->prepare($sqlkod);
+  $stmt->execute();
+
+  $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+  if ($stmt->execute())
+    return $result;
+  else
+    return false;
 }
 
 function auth($user, $pwd)
