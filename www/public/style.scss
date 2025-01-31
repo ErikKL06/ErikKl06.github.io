@@ -32,6 +32,10 @@ html {
             border-radius: 0.5rem;
             background-color: #588157;
             padding: 1rem;
+            max-width: 10rem;
+            min-width: 10rem;
+            max-height: 4rem;
+            min-height: 3rem;
 
             &:hover {
                 background-color: #3A5A40;
@@ -43,6 +47,9 @@ html {
             text-align: center;
             margin: 0 auto;
             font-size: 1.5rem;
+            max-height: fit-content;
+            max-width: fit-content;
+
         }
         .submit{
             text-decoration: none;
@@ -50,6 +57,10 @@ html {
             border-radius: 0.5rem;
             background-color: #588157;
             padding: 1rem;
+            max-width: 17rem;
+            min-width: 17rem;
+            max-height: 4rem;
+            min-height: 3rem;
 
             &:hover {
                 background-color: #3A5A40;
@@ -60,7 +71,7 @@ html {
             text-decoration: none;
             border: none;
             border-radius: 0.5rem;
-            background-color: #588157;
+            background-color: #DAD7CD;
             padding: 1rem;
             margin-bottom: 0.5rem;
             text-align: center;

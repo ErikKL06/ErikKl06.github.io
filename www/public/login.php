@@ -40,6 +40,8 @@ if (isset($_POST['password'], $_POST['user'])) {
 			<br>
 			<input type="password" name="password" required size="50" /><br />
 			<input class="submit" type="submit" value="Logga in" name="login" />
+
+
 		</form>
 	</section>
 	<section class="loginSignup">
@@ -48,6 +50,12 @@ if (isset($_POST['password'], $_POST['user'])) {
 			<button id="signupS">Registrera</button>
 		</a>
 	</section>
+	<section class="loginSignup">
+    <p>Fortsätt utan konto:</p>
+    <a href="index.php">
+      <button id="back">Hem</button>
+    </a>
+  </section>
 
 </body>
 

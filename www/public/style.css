@@ -27,6 +27,10 @@ html body button {
   border-radius: 0.5rem;
   background-color: #588157;
   padding: 1rem;
+  max-width: 10rem;
+  min-width: 10rem;
+  max-height: 4rem;
+  min-height: 3rem;
 }
 html body button:hover {
   background-color: #3A5A40;
@@ -36,6 +40,10 @@ html body .loginSignup {
   text-align: center;
   margin: 0 auto;
   font-size: 1.5rem;
+  max-height: -moz-fit-content;
+  max-height: fit-content;
+  max-width: -moz-fit-content;
+  max-width: fit-content;
 }
 html body .submit {
   text-decoration: none;
@@ -43,6 +51,10 @@ html body .submit {
   border-radius: 0.5rem;
   background-color: #588157;
   padding: 1rem;
+  max-width: 17rem;
+  min-width: 17rem;
+  max-height: 4rem;
+  min-height: 3rem;
 }
 html body .submit:hover {
   background-color: #3A5A40;
@@ -51,7 +63,7 @@ html body input {
   text-decoration: none;
   border: none;
   border-radius: 0.5rem;
-  background-color: #588157;
+  background-color: #DAD7CD;
   padding: 1rem;
   margin-bottom: 0.5rem;
   text-align: center;
