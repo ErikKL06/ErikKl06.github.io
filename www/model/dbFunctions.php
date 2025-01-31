@@ -35,7 +35,8 @@ function addUser($email, $user, $pwd)
     return false;
 }
 
-function getHighscore($uid){
+function getHighscore($uid)
+{
   $db = connectToDb();
   $stmt = $db->prepare("SELECT highscore FROM users WHERE uid = :uid");
   $stmt->bindValue(":uid", $uid);
@@ -50,11 +51,17 @@ function getHighscore($uid){
   }
 }
 
-function setHighscore($uid, $score){ //bara score behövs uid kollas i api:n.
+function setHighscore($score)
+{ //bara score behövs uid kollas i api:n.
   $db = connectToDb();
-  $stmt = $db->prepare("INSERT INTO highscore(highscore, uid) VALUES(:highscore, :uid)");
-  $stmt->bindValue(":score", $_POST['score']);
-  $stmt->bindValue(":uid", $_POST['uid']);
+
+
+  $sqlkod = "UPDATE users SET highscore = :highscore WHERE uid = :uid";
+  $stmt = $db->prepare($sqlkod);
+  $stmt->bindValue(':uid', $_SESSION['uid']);
+  $stmt->bindValue(':highscore', $score, PDO::PARAM_INT);
+  echo $score;
+  $stmt->execute();
 
   if ($stmt->execute())
     return true;
