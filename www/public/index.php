@@ -14,7 +14,6 @@
    <h1>Snake</h1>
 
 
-   <button type="button" id="re">Omstart</button>
 
    <section id="game-container">
       <canvas id="board" width="450rem" height="450rem">
