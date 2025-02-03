@@ -12,22 +12,25 @@
 
 <body>
    <h1>Snake</h1>
-   <section id="scores">
-      <p id="score">Score:</p>
-      <p id="highscoreHTML">Highscore:</p>
-   </section>
+
 
    <button type="button" id="re">Omstart</button>
 
    <section id="game-container">
       <canvas id="board" width="450rem" height="450rem">
          Din webbläsare stödjer inte HTML5 canvas tag.</canvas>
-      <table id="highscoreTable">
-         <tr>
-            <th>USER</th>
-            <th>HIGHSCORE</th>
-         </tr>
-      </table>
+      <section id="highscore">
+         <table id="highscoreTable">
+            <tr>
+               <th>USER</th>
+               <th>HIGHSCORE</th>
+            </tr>
+         </table>
+         <section id="scores">
+            <p id="score">Score:</p>
+            <h1 id="highscoreHTML">Highscore:</h1>
+         </section>
+      </section>
    </section>
    <section id="loginStatus">
       <?php
@@ -44,31 +47,3 @@
 
 </html>
 
-<script>
-   // Find a <table> element with id="myTable":
-   let table = document.getElementById("highscoreTable");
-   fetchAllHighscores();
-
-   async function fetchAllHighscores() {
-      try {
-         const response = await fetch("http://localhost/api/getAllHighscores.php");
-         if (!response.ok) {
-            throw new Error(`Response status: ${response.status}`);
-         }
-
-         const result = await response.json();
-         console.log(result);
-
-         //Lägger till alla highscores i tabellen med en forEach loop eftersom att det är en associativ array
-         result.forEach((highscore, index) => {
-            let row = table.insertRow(index + 1); // Insert at the next position
-            let cell1 = row.insertCell(0);
-            let cell2 = row.insertCell(1);
-            cell1.innerHTML = highscore.username;
-            cell2.innerHTML = highscore.highscore;
-         });
-      } catch (error) {
-         console.error(error.message);
-      }
-   }
-</script>

@@ -13,8 +13,10 @@ html body h1 {
   text-align: center;
 }
 html body #scores {
-  display: block;
-  text-align: center;
+  display: inline-block;
+}
+html body #scores p {
+  text-align: left;
 }
 html body #loginStatus {
   display: block;
@@ -76,25 +78,27 @@ html body #game-container {
   gap: 2rem; /* Add some space between the canvas and the table */
 }
 html body #board {
-  display: flex;
+  display: block;
   align-items: center;
   border: solid 0.25rem #344E41;
   border-radius: 0.6rem;
   margin: 0 auto;
   box-shadow: 0.25rem 0.25rem 0.25rem #3A5A40;
 }
-html body #highscoreTable {
+html body #highscore {
   display: inline-block;
+}
+html body #highscore #highscoreTable {
   border: solid 0.25rem #344E41;
   border-radius: 0.6rem;
 }
-html body #highscoreTable th {
+html body #highscore #highscoreTable th {
   min-width: -moz-fit-content;
   min-width: fit-content;
   text-align: center;
   padding: 0.5rem;
 }
-html body #highscoreTable td {
+html body #highscore #highscoreTable td {
   min-width: -moz-fit-content;
   min-width: fit-content;
   text-align: center;

@@ -15,8 +15,10 @@ html {
         }
 
         #scores {
-            display: block;
-            text-align: center;
+            display: inline-block;
+            p {
+                text-align: left;
+            }
         }
 
         #loginStatus {
@@ -83,7 +85,7 @@ html {
         }
 
         #board {
-            display: flex;
+            display: block;
             align-items: center;
             border: solid 0.25rem #344E41;
             border-radius: 0.6rem;
@@ -91,22 +93,29 @@ html {
             box-shadow: 0.25rem 0.25rem 0.25rem #3A5A40;
         }
 
-        #highscoreTable {
+        #highscore {
             display: inline-block;
-            border: solid 0.25rem #344E41;
-            border-radius: 0.6rem;
 
-            th {
-                min-width: fit-content;
-                text-align: center;
-                padding: 0.5rem;
+            #highscoreTable {
+                border: solid 0.25rem #344E41;
+                border-radius: 0.6rem;
+
+                th {
+                    min-width: fit-content;
+                    text-align: center;
+                    padding: 0.5rem;
+                }
+                
+                td {
+                    min-width: fit-content;
+                    text-align: center;
+                    padding: 0.5rem;
+                }
+
             }
-            
-            td {
-                min-width: fit-content;
-                text-align: center;
-                padding: 0.5rem;
-            }
+
+
+
         }
 
 

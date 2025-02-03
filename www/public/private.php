@@ -8,7 +8,7 @@
 </head>
 <body>
     <section>
-        <?php echo "user: " . $_SESSION['username']; ?>
+        <?php echo  $_SESSION['username']; ?>
         <button type="button" id="loggoutB">Logga ut</button>
     </section>
 </body>

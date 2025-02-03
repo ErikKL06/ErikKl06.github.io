@@ -39,6 +39,7 @@ let highscore = fetchHighscore();
 let gamescore = 0;
 
 let directionChanged = false;
+let table = document.getElementById("highscoreTable");
 
 
 
@@ -54,6 +55,7 @@ window.onload = function () {
     // Get the canvas element and its context for drawing
     board = document.getElementById("board");
     context = board.getContext("2d");
+    fetchAllHighscores();
 
     // Place the first food item on the board
     placeFood();
@@ -215,6 +217,7 @@ function checkGameOver() {
 
         }
         alert("Game Over");
+        fetchAllHighscores();
         restart();
 
     }
@@ -301,5 +304,34 @@ async function setHighscore(highscore) {
     console.log('Response data:', data);
 
 }
+
+async function fetchAllHighscores() {
+    try {
+       const response = await fetch("http://localhost/api/getAllHighscores.php");
+       if (!response.ok) {
+          throw new Error(`Response status: ${response.status}`);
+       }
+
+       const result = await response.json();
+       console.log(result);
+
+        // Clear the table before adding new highscores 
+        //! LÖS DETTA SÅ ATT DET BLIR SMIDIGARE BORTAGNING AV TABELL RADERNA
+        while (table.rows.length > 1) {
+           table.deleteRow(1);
+        }
+
+       //Lägger till alla highscores i tabellen med en forEach loop eftersom att det är en associativ array
+       result.forEach((highscore, index) => {
+          let row = table.insertRow(index + 1); // Insert at the next position
+          let cell1 = row.insertCell(0);
+          let cell2 = row.insertCell(1);
+          cell1.innerHTML = highscore.username;
+          cell2.innerHTML = highscore.highscore;
+       });
+    } catch (error) {
+       console.error(error.message);
+    }
+ }
 
 
