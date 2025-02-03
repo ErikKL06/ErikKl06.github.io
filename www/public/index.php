@@ -18,11 +18,11 @@
    </section>
 
    <button type="button" id="re">Omstart</button>
-   <canvas id="board" width="450rem" height="450rem">
-      Din webbläsare stödjer inte HTML5 canvas tag.</canvas>
-   <section>
+
+   <section id="game-container">
+      <canvas id="board" width="450rem" height="450rem">
+         Din webbläsare stödjer inte HTML5 canvas tag.</canvas>
       <table id="highscoreTable">
-         <thead>HIGHSCORES</thead>
          <tr>
             <th>USER</th>
             <th>HIGHSCORE</th>
