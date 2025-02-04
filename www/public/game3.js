@@ -91,7 +91,7 @@ function update() {
 
     checkGameOver(); //kollar om spelet är över
 
-    directionChanged = false;
+    directionChanged = false; // Reset the direction change flag
 
 }
 function renderGrid() {
@@ -124,22 +124,22 @@ function changeDirection(e) {
 
     if (directionChanged) return; // Prevent multiple direction changes in one update cycle
 
-    if (e.code == "ArrowUp" && velocityY != 1) {
+    if ((e.code == "ArrowUp" || e.code == "KeyW" ) && velocityY != 1) {
         velocityX = 0;
         velocityY = -1;
         rotationVinkel = 0; // Set the angle to -90 degrees
         directionChanged = true;
-    } else if (e.code == "ArrowDown" && velocityY != -1) {
+    } else if ((e.code == "ArrowDown" || e.code == "KeyS") && velocityY != -1) {
         velocityX = 0;
         velocityY = 1;
         rotationVinkel = 180; // Set the angle to 90 degrees
         directionChanged = true;
-    } else if (e.code == "ArrowLeft" && velocityX != 1) {
+    } else if ((e.code == "ArrowLeft" || e.code == "KeyA") && velocityX != 1) {
         velocityX = -1;
         velocityY = 0;
         rotationVinkel = 270; // Set the angle to 180 degrees
         directionChanged = true;
-    } else if (e.code == "ArrowRight" && velocityX != -1) {
+    } else if ((e.code == "ArrowRight" || e.code == "KeyD") && velocityX != -1) {
         velocityX = 1;
         velocityY = 0;
         rotationVinkel = 90; // Set the angle to 0 degrees
