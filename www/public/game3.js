@@ -45,7 +45,7 @@ let table = document.getElementById("highscoreTable");
 
 let score = document.getElementById("score");
 score.innerHTML = "Score: " + gamescore;
-
+let userLoggedIn = "";
 
 // Variable to store the rotation angle
 let rotationVinkel = 0;
@@ -55,6 +55,7 @@ window.onload = function () {
     // Get the canvas element and its context for drawing
     board = document.getElementById("board");
     context = board.getContext("2d");
+    getUsername();
     fetchAllHighscores();
 
     // Place the first food item on the board
@@ -124,7 +125,7 @@ function changeDirection(e) {
 
     if (directionChanged) return; // Prevent multiple direction changes in one update cycle
 
-    if ((e.code == "ArrowUp" || e.code == "KeyW" ) && velocityY != 1) {
+    if ((e.code == "ArrowUp" || e.code == "KeyW") && velocityY != 1) {
         velocityX = 0;
         velocityY = -1;
         rotationVinkel = 0; // Set the angle to -90 degrees
@@ -306,31 +307,51 @@ async function setHighscore(highscore) {
 
 async function fetchAllHighscores() {
     try {
-       const response = await fetch("http://localhost/api/getAllHighscores.php");
-       if (!response.ok) {
-          throw new Error(`Response status: ${response.status}`);
-       }
+        const response = await fetch("http://localhost/api/getAllHighscores.php");
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
 
-       const result = await response.json();
-       console.log(result);
+        const result = await response.json();
+        console.log(result);
 
         // Clear the table before adding new highscores 
         //! LÖS DETTA SÅ ATT DET BLIR SMIDIGARE BORTAGNING AV TABELL RADERNA
         while (table.rows.length > 1) {
-           table.deleteRow(1);
+            table.deleteRow(1);
         }
 
-       //Lägger till alla highscores i tabellen med en forEach loop eftersom att det är en associativ array
-       result.forEach((highscore, index) => {
-          let row = table.insertRow(index + 1); // Insert at the next position
-          let cell1 = row.insertCell(0);
-          let cell2 = row.insertCell(1);
-          cell1.innerHTML = highscore.username;
-          cell2.innerHTML = highscore.highscore;
-       });
+        //Lägger till alla highscores i tabellen med en forEach loop eftersom att det är en associativ array
+        result.forEach((highscore, index) => {
+            let row = table.insertRow(index + 1); // Insert at the next position
+            let cell1 = row.insertCell(0);
+            let cell2 = row.insertCell(1);
+            cell1.innerHTML = highscore.username;
+            cell2.innerHTML = highscore.highscore;
+            if(highscore.username === userLoggedIn){
+                row.style.backgroundColor = "#588157";  
+            }
+
+        });
     } catch (error) {
-       console.error(error.message);
+        console.error(error.message);
     }
- }
+}
+async function getUsername() {
+    try {
+        const response = await fetch("http://localhost/api/currentUserAPI.php");
+        if (!response.ok) {
+            throw new Error(`Response status: ${response.status}`);
+        }
+
+        const result = await response.json();
+        console.log(result);
+        userLoggedIn = result
+    } catch (error) {
+        console.error(error.message);
+    }
+
+    
+}
 
 
