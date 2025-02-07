@@ -5,79 +5,82 @@ let cols = 15;
 let board;
 let context;
 
-//snake head
+//snake huvude
 let snakeX = blockSize * 5;
 let snakeY = blockSize * 5;
 
-// Initial velocity of the snake
+// Bas hastigheter
 let velocityX = 0;
 let velocityY = 0;
 
-// Array to store the snake's body segments
+// Array för att spara position av ormen
 let snakeBody = [];
 
-// letiables to store the food's position
+//matens positionsvariabler
 let foodX;
 let foodY;
 
-// Flag to indicate if the game is over
+//boolean till att kolla om spelet är över
 let gameOver = false;
 
-// Load images for the snake and the food
+// laddar in bilder till huvdet
 let snakeHead = new Image();
-snakeHead.src = 'img/head.png'; // Replace with the path to your snake image
+snakeHead.src = 'img/head.png';
 
 let foodImage = new Image();
-foodImage.src = 'img/IdasApple.png'; // Replace with the path to your food image
+foodImage.src = 'img/IdasApple.png';
 
 let snakeBodyImage = new Image();
-snakeBodyImage.src = 'img/Sbody.png'; // Replace with the path to your snake body image
+snakeBodyImage.src = 'img/Sbody.png';
 
-let re = document.getElementById("re");
-
+//laddar in basvärden för scores och startar async funktion till api
 let highscore = fetchHighscore();
 let gamescore = 0;
 
+//variable för att kolla om du har ändrat position redan på samma ruta
 let directionChanged = false;
+
+//lägger till en tabell för highscoresen
 let table = document.getElementById("highscoreTable");
 
 
 
 let score = document.getElementById("score");
 score.innerHTML = "Score: " + gamescore;
+
+//variabel för att kolla vem som är inloggad
 let userLoggedIn = "";
 
-// Variable to store the rotation angle
+//variabel till att vrida huvudet
 let rotationVinkel = 0;
 
-// Function to initialize the game when the window loads
+// funmktion som säger vad som händer när sidan laddas in
 window.onload = function () {
-    // Get the canvas element and its context for drawing
+    //variabel till boarden
     board = document.getElementById("board");
     context = board.getContext("2d");
     getUsername();
     fetchAllHighscores();
 
-    // Place the first food item on the board
+    //lägger in maten
     placeFood();
 
-    // Add an event listener for key presses to change the snake's direction
+    // eventlistner till att starta
     document.addEventListener("keyup", changeDirection);
 
-    // Call the update function every 100 milliseconds to update the game state
+    // updateringsfrekvensen till funktionen update
     setInterval(update, 1000 / 6);
 
 }
 
-// Function to update the game state
 function update() {
-    // If the game is over, exit the function
+    // kollar och gameover och om det är sant så lämnar man funktionen
     if (gameOver) {
         return;
     }
 
-    clearboard(); //clears the board
-    // Draw the food image
+    clearboard(); //clearar boarden
+    // ritar ut maten
     context.drawImage(foodImage, foodX, foodY, blockSize, blockSize);
 
     renderGrid(); //ritar ut rutnätet
@@ -96,74 +99,74 @@ function update() {
 
 }
 function renderGrid() {
-    const xMax = board.width;  // Width of the canvas
-    const yMax = board.height; // Height of the canvas
-    const gridSize = 30;       // Spacing between grid lines
+    const xMax = board.width;  // bredden på canvasen
+    const yMax = board.height; // höjden på canvasen
+    const gridSize = 30;       // storlek på rutorna
 
-    // Draw the grid
+    //ritar ut griden
     context.beginPath();
-    context.strokeStyle = "#3A5A40"; // Grid line color
+    context.strokeStyle = "#3A5A40"; // Grid linje färg
 
-    // Vertical grid lines
+    // Vertikala grid liner
     for (let x = 0; x <= xMax; x += gridSize) {
-        context.moveTo(x, 0);         // Move to the top of the column
-        context.lineTo(x, yMax);      // Draw to the bottom of the column
+        context.moveTo(x, 0);         // flyttar linjerna ända vägen upp till botten
+        context.lineTo(x, yMax);
     }
 
-    // Horizontal grid lines
+    // Horisontala grid liner
     for (let y = 0; y <= yMax; y += gridSize) {
-        context.moveTo(0, y);         // Move to the start of the row
-        context.lineTo(xMax, y);      // Draw to the end of the row
+        context.moveTo(0, y);         //flyttar till starten av raden
+        context.lineTo(xMax, y);      //ritar till slutet av raden
     }
 
-    context.stroke(); // Render all the grid lines
+    context.stroke(); //rita ut allt
 }
 
 
-// Function to change the snake's direction based on key presses
+// funktion till att ändra håll ormen åker åt
 function changeDirection(e) {
 
-    if (directionChanged) return; // Prevent multiple direction changes in one update cycle
+    if (directionChanged) return; //hindrar att kunnat ändra håll på samma ruta
 
     if ((e.code == "ArrowUp" || e.code == "KeyW") && velocityY != 1) {
         velocityX = 0;
         velocityY = -1;
-        rotationVinkel = 0; // Set the angle to -90 degrees
+        rotationVinkel = 0;
         directionChanged = true;
     } else if ((e.code == "ArrowDown" || e.code == "KeyS") && velocityY != -1) {
         velocityX = 0;
         velocityY = 1;
-        rotationVinkel = 180; // Set the angle to 90 degrees
+        rotationVinkel = 180;
         directionChanged = true;
     } else if ((e.code == "ArrowLeft" || e.code == "KeyA") && velocityX != 1) {
         velocityX = -1;
         velocityY = 0;
-        rotationVinkel = 270; // Set the angle to 180 degrees
+        rotationVinkel = 270;
         directionChanged = true;
     } else if ((e.code == "ArrowRight" || e.code == "KeyD") && velocityX != -1) {
         velocityX = 1;
         velocityY = 0;
-        rotationVinkel = 90; // Set the angle to 0 degrees
+        rotationVinkel = 90;
         directionChanged = true;
     }
 }
 
 function clearboard() {
-    // Clear the board by filling it with a black rectangle
+    //clearar boarden
     context.fillStyle = "#588157";
     context.fillRect(0, 0, board.width, board.height);
 
 }
 
 function checkFood() {
-    // Check if the snake has eaten the food
+    // kollar om ormen ätit mat
     if (snakeX == foodX && snakeY == foodY) {
-        // Add a new segment to the snake's body
+        //lägger till en ruta på ormen om den har ätit
         snakeBody.push([foodX, foodY]);
         gamescore += 1;
         updateScore();
 
-        // Place a new food item on the board
+        //placera ut ny mat
         placeFood();
     }
 }
@@ -175,8 +178,8 @@ function updateHighscore() {
     highscoreHTML.innerHTML = "Highscore: " + highscore;
 }
 
-function moveSnake() { //fix för animation är 0.5 och köra movesnake() två gånger update()
-    // Move the snake's body segments
+function moveSnake() {
+    //flyttar orm arrayen
     for (let i = snakeBody.length - 1; i > 0; i--) {
         snakeBody[i] = snakeBody[i - 1];
     }
@@ -186,20 +189,20 @@ function moveSnake() { //fix för animation är 0.5 och köra movesnake() två g
 }
 
 function updateSnake() {
-    // Update the snake's position based on its velocity
+    // updaterar ormenspostition
     snakeX += velocityX * blockSize;
     snakeY += velocityY * blockSize;
 }
 
 function drawSnake() {
-    // Draw the snake's head with rotation
+    // ritar ormens huvud med rotation
     context.save();
     context.translate(snakeX + blockSize / 2, snakeY + blockSize / 2);
     context.rotate(rotationVinkel * Math.PI / 180);
     context.drawImage(snakeHead, -blockSize / 2, -blockSize / 2, blockSize, blockSize);
     context.restore();
 
-    // Draw the snake's body segments
+    // ritar ut modelen
     for (let i = 0; i < snakeBody.length; i++) {
         context.drawImage(snakeBodyImage, snakeBody[i][0], snakeBody[i][1], blockSize, blockSize);
     }
@@ -207,7 +210,7 @@ function drawSnake() {
 }
 
 function checkGameOver() {
-    // Check for game over conditions
+    // kollar om det är gameover
     if (snakeX < 0 || snakeX >= cols * blockSize || snakeY < 0 || snakeY >= rows * blockSize) {
         gameOver = true;
         if (highscore < gamescore) {
@@ -237,16 +240,17 @@ function checkGameOver() {
     }
 }
 
-// Function to place a new food item on the board at a random position
+
+//funktion till att placera mat
 function placeFood() {
     let validPosition = false;
 
     while (!validPosition) {
-        // Generate random coordinates for the food within the bounds of the board
+        // genererar postition för nytt äpple
         foodX = Math.floor(Math.random() * cols) * blockSize;
         foodY = Math.floor(Math.random() * rows) * blockSize;
 
-        // Check if the generated coordinates overlap with any part of the snake's body
+        //kollar så att ormens kropp inte är på samma position
         validPosition = true;
         for (let i = 0; i < snakeBody.length; i++) {
             if (foodX === snakeBody[i][0] && foodY === snakeBody[i][1]) {
@@ -315,7 +319,7 @@ async function fetchAllHighscores() {
         const result = await response.json();
         console.log(result);
 
-        // Clear the table before adding new highscores 
+        //clearar på tabellen
         //! LÖS DETTA SÅ ATT DET BLIR SMIDIGARE BORTAGNING AV TABELL RADERNA
         while (table.rows.length > 1) {
             table.deleteRow(1);
@@ -323,13 +327,14 @@ async function fetchAllHighscores() {
 
         //Lägger till alla highscores i tabellen med en forEach loop eftersom att det är en associativ array
         result.forEach((highscore, index) => {
-            let row = table.insertRow(index + 1); // Insert at the next position
+            let row = table.insertRow(index + 1); //lägger till en ny rad efter den andra
             let cell1 = row.insertCell(0);
             let cell2 = row.insertCell(1);
             cell1.innerHTML = highscore.username;
             cell2.innerHTML = highscore.highscore;
-            if(highscore.username === userLoggedIn){
-                row.style.backgroundColor = "#588157";  
+            if(highscore.username === userLoggedIn){  //stylar usernamet om det är samma som den inloggade användaren
+                row.style.color = "#ed1c24";
+                row.style.fontWeight = "bold";
             }
 
         });
@@ -346,7 +351,7 @@ async function getUsername() {
 
         const result = await response.json();
         console.log(result);
-        userLoggedIn = result
+        userLoggedIn = result;
     } catch (error) {
         console.error(error.message);
     }
