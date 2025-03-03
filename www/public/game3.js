@@ -53,7 +53,7 @@ let userLoggedIn = "";
 let rotationVinkel = 0;
 
 // funmktion som säger vad som händer när sidan laddas in
-window.onload = function () {
+window.onload = function () { //! gör om till arrow och lägg in const till board och context och instansera i funktionen
   //variabel till boarden
   board = document.getElementById("board");
   context = board.getContext("2d");
@@ -66,7 +66,7 @@ window.onload = function () {
   // eventlistner till att starta
   document.addEventListener("keyup", changeDirection);
 
-  // updateringsfrekvensen till funktionen update
+  // updateringsfrekvensen till funktionen update //! kör requestanimationframe istället
   setInterval(update, 1000 / 6);
 };
 
