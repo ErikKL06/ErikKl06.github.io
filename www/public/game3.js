@@ -34,7 +34,7 @@ let snakeBodyImage = new Image();
 snakeBodyImage.src = "img/Sbody.png";
 
 //laddar in basvärden för scores och startar async funktion till api
-let highscore = fetchHighscore();
+fetchHighscore();
 let gamescore = 0;
 
 //variable för att kolla om du har ändrat position redan på samma ruta
@@ -214,11 +214,7 @@ function drawSnake() {
 
 function checkGameOver() {
   // kollar om det är gameover
-  if (
-    snakeX < 0 ||
-    snakeX >= cols * blockSize ||
-    snakeY < 0 ||
-    snakeY >= rows * blockSize
+  if (snakeX < 0 ||snakeX >= cols * blockSize ||snakeY < 0 ||snakeY >= rows * blockSize
   ) {
     gameOver = true;
     if (highscore < gamescore) {
