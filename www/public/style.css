@@ -1,5 +1,5 @@
 html {
-  background-color: #A3B18A;
+  background-color: #a3b18a;
   margin: 0;
   padding: 0;
   font-size: 62.5%;
@@ -7,15 +7,18 @@ html {
   justify-content: center;
   align-items: center;
   font-size: 1rem;
+  height: 100vh;
 }
-html body h1 {
-  display: block;
-  text-align: center;
+html body {
+  margin-bottom: 5rem;
 }
 html body #scores {
   display: inline-block;
 }
 html body #scores p {
+  text-align: left;
+}
+html body #scores h1 {
   text-align: left;
 }
 html body #loginStatus {
@@ -25,6 +28,16 @@ html body #loginStatus {
   right: 0;
   bottom: 0;
   margin: 1rem;
+}
+html body #loginStatus #userStatus {
+  display: block;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 0.25rem;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  font-weight: bolder;
+  background-color: #588157;
 }
 html body button {
   text-decoration: none;
@@ -38,7 +51,7 @@ html body button {
   min-height: 3rem;
 }
 html body button:hover {
-  background-color: #3A5A40;
+  background-color: #3a5a40;
 }
 html body .loginSignup {
   text-align: center;
@@ -61,13 +74,13 @@ html body .submit {
   min-height: 3rem;
 }
 html body .submit:hover {
-  background-color: #3A5A40;
+  background-color: #3a5a40;
 }
 html body input {
   text-decoration: none;
   border: none;
   border-radius: 0.5rem;
-  background-color: #DAD7CD;
+  background-color: #dad7cd;
   padding: 1rem;
   margin-bottom: 0.5rem;
   text-align: center;
@@ -76,20 +89,21 @@ html body #game-container {
   display: flex;
   align-items: flex-start; /* Align items to the top */
   gap: 2rem; /* Add some space between the canvas and the table */
+  margin: 0 auto;
 }
 html body #board {
   display: block;
   align-items: center;
-  border: solid 0.25rem #344E41;
+  border: solid 0.25rem #344e41;
   border-radius: 0.6rem;
   margin: 0 auto;
-  box-shadow: 0.25rem 0.25rem 0.25rem #3A5A40;
+  box-shadow: 0.25rem 0.25rem 0.25rem #3a5a40;
 }
 html body #highscore {
   display: inline-block;
 }
 html body #highscore #highscoreTable {
-  border: solid 0.25rem #344E41;
+  border: solid 0.25rem #344e41;
   border-radius: 0.6rem;
 }
 html body #highscore #highscoreTable th {

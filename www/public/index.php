@@ -1,7 +1,6 @@
 <?php
 
 session_start();
-include_once('count.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -15,7 +14,6 @@ include_once('count.php');
 </head>
 
 <body>
-   <h1>Snake</h1>
 
 
 
@@ -37,6 +35,7 @@ include_once('count.php');
       </section>
    </section>
    <section id="loginStatus">
+      <p id="userStatus">Gäst</p>
       <?php
       if (isset($_SESSION['uid'])) {
          include 'private.php';

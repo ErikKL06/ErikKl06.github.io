@@ -1,11 +1,9 @@
-<?php 
+<?php
 session_start();
 
-if (isset($_SESSION['username'])){
+if (isset($_SESSION['username'])) {
     $username = $_SESSION['username'];
 } else {
-    $username = "Not logged in";
+    $username = "Gäst";
 }
 echo json_encode($username);
-
-?>

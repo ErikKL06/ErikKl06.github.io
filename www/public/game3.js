@@ -223,7 +223,6 @@ function checkGameOver() {
       updateHighscore();
     }
     alert("Game Over");
-    fetchAllHighscores();
     restart();
   }
 
@@ -265,12 +264,13 @@ function restart() {
   snakeX = blockSize * 5;
   snakeY = blockSize * 5;
   velocityX = 0;
-  velocityY = 0;
-  highscore = fetchHighscore();
+  velocityY = 0; 
   snakeBody = [];
   gameOver = false;
   placeFood();
   gamescore = 0;
+  updateScore();
+  fetchAllHighscores();
 }
 
 async function fetchHighscore() {
@@ -337,6 +337,7 @@ async function fetchAllHighscores() {
   }
 }
 async function getUsername() {
+  let userStatus = document.getElementById("userStatus");
   try {
     const response = await fetch("http://localhost/api/currentUserAPI.php");
     if (!response.ok) {
@@ -346,6 +347,8 @@ async function getUsername() {
     const result = await response.json();
     console.log(result);
     userLoggedIn = result;
+    userStatus.innerHTML = userLoggedIn;
+
   } catch (error) {
     console.error(error.message);
   }
