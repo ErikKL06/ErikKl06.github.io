@@ -2,7 +2,7 @@
 include("../../model/dbFunctions.php");
 
 session_start();
-
+header("Access-Control-Allow-Origin: *");
 $input = json_decode(file_get_contents("php://input"), true);
 echo json_encode($input);
 
