@@ -25,7 +25,7 @@ if (isset($_POST['password'], $_POST['user'])) {
 <head>
 	<meta charset="utf-8">
 	<link rel="stylesheet" href="style.css">
-	<title>Sessioner</title>
+	<title>login</title>
 </head>
 
 <body>
@@ -51,11 +51,11 @@ if (isset($_POST['password'], $_POST['user'])) {
 		</a>
 	</section>
 	<section class="loginSignup">
-    <p>Fortsätt utan konto:</p>
-    <a href="index.php">
-      <button id="back">Hem</button>
-    </a>
-  </section>
+		<p>Fortsätt utan konto:</p>
+		<a href="index.php">
+			<button id="back">Hem</button>
+		</a>
+	</section>
 
 </body>
 

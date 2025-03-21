@@ -10,7 +10,7 @@ session_start();
    <meta name="viewport" content="width=device-width, initial-scale=1.0">
    <script src="game3.js" defer></script>
    <link rel="stylesheet" href="style.css">
-   <title>Document</title>
+   <title>SnakeSpel</title>
 </head>
 
 <body>
