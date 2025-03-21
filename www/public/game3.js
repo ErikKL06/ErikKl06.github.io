@@ -275,7 +275,7 @@ function restart() {
 
 async function fetchHighscore() {
   try {
-    const response = await fetch("http://localhost/api/getHighscore.php");
+    const response = await fetch("/api/getHighscore.php");
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
@@ -291,7 +291,7 @@ async function fetchHighscore() {
 
 async function setHighscore(highscore) {
   console.log("Sending highscore:", highscore);
-  const response = await fetch("http://localhost/api/setHighscore.php", {
+  const response = await fetch("/api/setHighscore.php", {
     method: "POST",
     body: JSON.stringify({ highscore: highscore }),
     headers: {
@@ -305,7 +305,7 @@ async function setHighscore(highscore) {
 
 async function fetchAllHighscores() {
   try {
-    const response = await fetch("http://localhost/api/getAllHighscores.php");
+    const response = await fetch("/api/getAllHighscores.php");
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
@@ -339,7 +339,7 @@ async function fetchAllHighscores() {
 async function getUsername() {
   let userStatus = document.getElementById("userStatus");
   try {
-    const response = await fetch("http://localhost/api/currentUserAPI.php");
+    const response = await fetch("/api/currentUserAPI.php");
     if (!response.ok) {
       throw new Error(`Response status: ${response.status}`);
     }
