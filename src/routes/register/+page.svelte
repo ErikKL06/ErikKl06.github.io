@@ -2,13 +2,23 @@
   let email = '';
   let password = '';
   let confirmPassword = '';
-  function handleRegister() {
+  async function handleRegister() {
     // Placeholder for register logic
     if (password !== confirmPassword) {
       alert('Passwords do not match!');
       return;
     }
-    alert(`Registering ${email}`);
+
+    let { data, error } = await supabase.auth.signUp({
+      email: email,
+      password: password
+    });
+    
+    if (error) {
+      alert(`Error: ${error.message}`);
+    } else {
+      alert(`Registering ${email}`);
+    }
   }
 </script>
 
