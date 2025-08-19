@@ -1,4 +1,6 @@
 <script>
+  import { supabase} from '$lib/supabaseClient';
+    import { redirect } from '@sveltejs/kit';
   let email = '';
   let password = '';
   let confirmPassword = '';
@@ -18,6 +20,7 @@
       alert(`Error: ${error.message}`);
     } else {
       alert(`Registering ${email}`);
+      redirect('/login');
     }
   }
 </script>

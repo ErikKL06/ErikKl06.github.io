@@ -1,9 +1,19 @@
 <script>
+  import { supabase } from "$lib/supabaseClient";
+    import { redirect } from "@sveltejs/kit";
   let email = '';
   let password = '';
-  function handleLogin() {
-    // Placeholder for login logic
-    alert(`Logging in as ${email}`);
+  async function handleLogin() {
+    let { data, error } = await supabase.auth.signInWithPassword({
+      email: email,
+      password: password
+    });
+    if (error) {
+      alert(`Error: ${error.message}`);
+    } else {
+      alert(`Logging in as ${email}`);
+      redirect('/'); // Use the redirect function from SvelteKit
+    }
   }
 </script>
 
